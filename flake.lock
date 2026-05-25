@@ -447,14 +447,17 @@
         "wrapper-modules": "wrapper-modules"
       },
       "locked": {
-        "lastModified": 1779544621,
-        "narHash": "sha256-Vjpiv1VqH4w9Z2dsUW/c+AlS8WQM5d4E2bGsNKLjyQ8=",
-        "path": "/home/gabriele/omniri",
-        "type": "path"
+        "lastModified": 1779570764,
+        "narHash": "sha256-dmQlHKj1GysGPKyRRV6B9+FzeSnvL0LTEI+QkrgjPqM=",
+        "owner": "UpFourAGoodTime",
+        "repo": "omniri",
+        "rev": "f99d425bee86c444f0febc12b56f8dc0cc17797d",
+        "type": "github"
       },
       "original": {
-        "path": "/home/gabriele/omniri",
-        "type": "path"
+        "owner": "UpFourAGoodTime",
+        "repo": "omniri",
+        "type": "github"
       }
     },
     "root": {
