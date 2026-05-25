@@ -135,7 +135,7 @@
       # Home Manager is pretty good at managing dotfiles. The primary way to manage
       # plain files is through 'home.file'.
       home.file = {
-        "user-config.kdl".text = ''
+        ".config/niri-stylix/user-config.kdl".text = ''
 
           layout {
             background-color "transparent"
