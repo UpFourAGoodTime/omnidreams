@@ -34,12 +34,11 @@
 
     x1e-nixos-config = {
       url = "github:UpFourAGoodTime/x1e-nixos-config/3c88be282680914095fefe6a6a5db18308011cac";
-      inputs.nixpkgs.follows = "nixpkgs-stable";
     };
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
   };
 
   outputs =

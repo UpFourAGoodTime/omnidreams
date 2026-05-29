@@ -101,8 +101,9 @@
 
       home.packages = [
         pkgs.ungoogled-chromium
-        pkgs.freetube
+        pkgs-stable.freetube
         pkgs-stable.zed-editor
+        pkgs.session-desktop
 
         pkgs.blueman
         pkgs.localsend
