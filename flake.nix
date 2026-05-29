@@ -33,7 +33,7 @@
     };
 
     x1e-nixos-config = {
-      url = "github:UpFourAGoodTime/x1e-nixos-config/3c88be282680914095fefe6a6a5db18308011cac";
+      url = "github:/kuruczgy/x1e-nixos-config/3c88be282680914095fefe6a6a5db18308011cac";
     };
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
