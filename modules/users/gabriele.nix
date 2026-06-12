@@ -113,7 +113,6 @@
         pkgs-unstable.zed-editor
         pkgs-unstable.session-desktop
 
-        pkgs-unstable.blueman
         pkgs-unstable.localsend
 
         logseq-patch
