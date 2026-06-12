@@ -6,6 +6,8 @@
   flake.nixosModules.gabriele-config =
     {
       pkgs,
+      lib,
+      config,
       ...
     }:
     {
@@ -54,6 +56,13 @@
         inputs.omniri.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers
       }/share/wallpapers/wallhaven-k81776_2880x1620.png";
 
+      # Syncthing
+      networking.firewall.allowedTCPPorts = [
+        8384
+        22000
+        21027
+      ];
+
       users.users."gabriele" = {
         createHome = true;
         description = "Gabriel Eaker";
@@ -61,6 +70,7 @@
           "networkmanager"
           "wheel"
           "audio"
+          "syncthing"
           # "qemu-libvirtd"
           # "libvirtd"
         ];
@@ -106,6 +116,38 @@
       nixpkgs.config.allowUnfree = true;
 
       stylix.enable = true;
+
+      services.syncthing = {
+        enable = true;
+        guiAddress = "0.0.0.0:8384"; # By default syncthing only listens to localhost
+
+        settings = {
+          gui = {
+            user = "admin";
+            password = "adminPassword";
+          };
+
+          folders = {
+            "Downloads" = {
+              path = "/home/gabriele/Downloads";
+            };
+
+            "Documents" = {
+              path = "/home/gabriele/Documents";
+            };
+
+            "Pictures" = {
+              path = "/home/gabriele/Pictures";
+            };
+
+            "DCIM" = {
+              path = "/home/gabriele/DCIM";
+            };
+          };
+
+        };
+
+      };
 
       home.packages = [
         pkgs-unstable.ungoogled-chromium
