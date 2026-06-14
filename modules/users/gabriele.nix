@@ -119,7 +119,6 @@
 
       services.syncthing = {
         enable = true;
-        guiAddress = "0.0.0.0:8384"; # By default syncthing only listens to localhost
 
         settings = {
           gui = {
@@ -127,22 +126,48 @@
             password = "adminPassword";
           };
 
+          devices = {
+            "Pixel 6 Pro" = {
+              id = "BRJFJAB-XPSAVIJ-BMES6UA-SH76SEF-SHCVKH6-Q5KNMNZ-QS6GONV-PZPLKQA";
+            };
+
+            "Karen Pixel 7" = {
+              id = "X4JOUCU-7U3JH3D-X4YKI5K-EZADLC3-3YW5FSP-X3NCACC-RVO2TYJ-AQHKPQ6";
+            };
+
+          };
+
           folders = {
             "Downloads" = {
               path = "/home/gabriele/Downloads";
+              devices = [ "Pixel 6 Pro" ];
             };
 
             "Documents" = {
               path = "/home/gabriele/Documents";
+              devices = [ "Pixel 6 Pro" ];
             };
 
             "Pictures" = {
               path = "/home/gabriele/Pictures";
+              devices = [ "Pixel 6 Pro" ];
             };
 
             "DCIM" = {
               path = "/home/gabriele/DCIM";
+              devices = [ "Pixel 6 Pro" ];
             };
+
+            "Seedvault Pixel 6 Pro" = {
+              path = "/home/gabriele/Seedvaults/Pixel-6-Pro";
+              devices = [ "Pixel 6 Pro" ];
+            };
+
+            "Seedvault Karen Pixel 7" = {
+              path = "/home/gabriele/Seedvaults/not-mine/Karen-Pixel-7";
+              devices = [ "Karen Pixel 7" ];
+            };
+
           };
 
         };
