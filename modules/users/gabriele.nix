@@ -6,8 +6,6 @@
   flake.nixosModules.gabriele-config =
     {
       pkgs,
-      lib,
-      config,
       ...
     }:
     {
@@ -123,7 +121,7 @@
         settings = {
           gui = {
             user = "admin";
-            password = "adminPassword";
+            password = "%qz&w!fcRsPqwGDD0BkAuDDrcVEsQ!7k^mSe$d0eHbyGyrEEz@4tDRGqp5Vg*&Ed"; # This is insecure, consider this password compromised when setting up Sops-Nix
           };
 
           devices = {

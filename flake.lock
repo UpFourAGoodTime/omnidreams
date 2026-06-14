@@ -463,11 +463,11 @@
         "wrapper-modules": "wrapper-modules"
       },
       "locked": {
-        "lastModified": 1780384244,
-        "narHash": "sha256-oGCPFwQowkVRO1esWGX97bONou9y84p+kkG4p2uvOIo=",
+        "lastModified": 1781446361,
+        "narHash": "sha256-V/5TcSGsegvIce+G8hZAl8wszM73uYVKX8D6iLX8b/E=",
         "owner": "UpFourAGoodTime",
         "repo": "omniri",
-        "rev": "72932f607fe060668a2cd6460d6a3a5c79c0d4d0",
+        "rev": "38ee3ff311b3b6a0254d0952767d3dcabbcbb263",
         "type": "github"
       },
       "original": {
