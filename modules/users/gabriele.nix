@@ -200,6 +200,12 @@
 
       ];
 
+      xdg.mimeApps.defaultApplications = {
+        "text/html" = "chromium-desktop.desktop";
+        "x-scheme-handler/http" = "chromium-desktop.desktop";
+        "x-scheme-handler/https" = "chromium-desktop.desktop";
+      };
+
       home.sessionVariables = {
         # QT_QPA_PLATFORMTHEME = "gtk3";
         # QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
