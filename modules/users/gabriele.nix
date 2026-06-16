@@ -176,7 +176,7 @@
         pkgs-unstable.ungoogled-chromium
         pkgs-unstable.freetube
         pkgs-unstable.zed-editor
-        pkgs-unstable.session-desktop
+        pkgs-unstable.element-desktop
 
         pkgs-unstable.localsend
 
