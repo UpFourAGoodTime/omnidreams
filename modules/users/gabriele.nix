@@ -94,11 +94,9 @@
     let
       # pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
-      pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-
       # Create a customized version of logseq
-      logseq-patch = pkgs-unstable.logseq.override {
-        electron_39 = pkgs-unstable.electron_40;
+      logseq-patch = pkgs.logseq.override {
+        electron_39 = pkgs.electron_40;
       };
     in
     {
@@ -173,28 +171,28 @@
       };
 
       home.packages = [
-        pkgs-unstable.ungoogled-chromium
-        pkgs-unstable.freetube
-        pkgs-unstable.zed-editor
-        pkgs-unstable.element-desktop
+        pkgs.ungoogled-chromium
+        pkgs.freetube
+        pkgs.zed-editor
+        pkgs.element-desktop
 
-        pkgs-unstable.localsend
+        pkgs.localsend
 
         logseq-patch
-        pkgs-unstable.anki
+        pkgs.anki
 
-        pkgs-unstable.obs-studio
-        pkgs-unstable.vlc
+        pkgs.obs-studio
+        pkgs.vlc
 
-        pkgs-unstable.prismlauncher
+        pkgs.prismlauncher
 
         pkgs.nh
-        pkgs-unstable.nixd
-        pkgs-unstable.nil
+        pkgs.nixd
+        pkgs.nil
 
-        pkgs-unstable.nerd-fonts.jetbrains-mono
-        pkgs-unstable.nerd-fonts.hasklug
-        pkgs-unstable.nerd-fonts.hurmit
+        pkgs.nerd-fonts.jetbrains-mono
+        pkgs.nerd-fonts.hasklug
+        pkgs.nerd-fonts.hurmit
 
         # pkgs.python312Packages.yt-dlp
 
