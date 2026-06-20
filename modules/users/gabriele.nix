@@ -104,10 +104,28 @@
         inputs.omniri.homeModules.default
       ];
 
-      home.username = "gabriele";
-      home.homeDirectory = "/home/gabriele";
+      # Let Home Manager install and manage itself.
+      programs.home-manager.enable = true;
 
-      home.stateVersion = "26.05";
+      home = {
+        stateVersion = "26.05";
+
+        username = "gabriele";
+        homeDirectory = "/home/gabriele";
+
+        sessionVariables = {
+          EDITOR = "nano";
+        };
+
+      };
+
+      nix.settings = {
+        download-buffer-size = 524288000;
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+      };
 
       nixpkgs.config.allowUnfree = true;
 
@@ -204,13 +222,6 @@
         "x-scheme-handler/https" = "chromium-desktop.desktop";
       };
 
-      home.sessionVariables = {
-        # QT_QPA_PLATFORMTHEME = "gtk3";
-        # QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
-      };
-
-      # Home Manager is pretty good at managing dotfiles. The primary way to manage
-      # plain files is through 'home.file'.
       home.file = {
         ".config/niri-stylix/user-config.kdl".text = ''
 
@@ -259,21 +270,8 @@
           user.name = "UpFourAGoodTime";
           user.email = "GabrielEaker@pm.me";
           init.defaultBranch = "main";
-          safe.directory = "/etc/nixos/";
         };
       };
 
-      home.sessionVariables = {
-        EDITOR = "nano";
-      };
-
-      # Let Home Manager install and manage itself.
-      programs.home-manager.enable = true;
-
-      nix.settings.download-buffer-size = 524288000;
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
     };
 }
