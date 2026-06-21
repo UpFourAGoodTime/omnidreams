@@ -137,7 +137,7 @@
         enable = true;
         webApps = [
           {
-            name = "Proton Mail";
+            name = "Mail";
             url = "https://mail.proton.me";
             icon = ../../assets/icons/webapps/Proton/mail.png;
             appDataDir = false;

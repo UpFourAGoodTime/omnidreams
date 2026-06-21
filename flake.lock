@@ -70,11 +70,11 @@
     },
     "chromium-webapps": {
       "locked": {
-        "lastModified": 1782033839,
-        "narHash": "sha256-9Er+rbdCOArmRZnN0ou6AJ7d0j6MVuBVGa0jatGDg+w=",
+        "lastModified": 1782037424,
+        "narHash": "sha256-RAAQliKbTMR0zqAqIyOAG750Ix40n2x9I7KxH0Yg/S4=",
         "owner": "UpFourAGoodTime",
         "repo": "nix-chromium-webapps",
-        "rev": "0c2f7099a462e25969e7ada859e31a431bdc292d",
+        "rev": "8d1ac7f7e693f62fe51eb500f18fbff2772aa72f",
         "type": "github"
       },
       "original": {
