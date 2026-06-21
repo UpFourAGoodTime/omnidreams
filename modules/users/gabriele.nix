@@ -142,6 +142,18 @@
             icon = ../../assets/icons/webapps/Proton/mail.png;
             appDataDir = false;
           }
+          {
+            name = "FMD Server";
+            url = "https://server.fmd-foss.org/";
+            icon = ../../assets/icons/webapps/Proton/FMD.png;
+            appDataDir = false;
+          }
+          {
+            name = "Fluffychat";
+            url = "https://fluffychat.im/web";
+            icon = ../../assets/icons/webapps/Proton/fluffychat.png;
+            appDataDir = false;
+          }
         ];
 
         package = pkgs.ungoogled-chromium;
