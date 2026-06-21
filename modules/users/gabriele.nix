@@ -102,6 +102,8 @@
     {
       imports = [
         inputs.omniri.homeModules.default
+
+        inputs.chromium-webapps.homeManagerModules.default
       ];
 
       # Let Home Manager install and manage itself.
@@ -130,6 +132,20 @@
       nixpkgs.config.allowUnfree = true;
 
       stylix.enable = true;
+
+      programs.chromium-webapps = {
+        enable = true;
+        webApps = [
+          {
+            name = "Proton Mail";
+            url = "https://mail.proton.me";
+            icon = ../../assets/icons/webapps/Proton/mail.png;
+            appDataDir = false;
+          }
+        ];
+
+        package = pkgs.ungoogled-chromium;
+      };
 
       services.syncthing = {
         enable = true;

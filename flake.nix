@@ -32,6 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    chromium-webapps = {
+      url = "github:UpFourAGoodTime/nix-chromium-webapps";
+    };
+
     x1e-nixos-config = {
       url = "github:/UpFourAGoodTime/x1e-nixos-config";
     };

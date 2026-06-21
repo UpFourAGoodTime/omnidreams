@@ -68,6 +68,21 @@
         "type": "github"
       }
     },
+    "chromium-webapps": {
+      "locked": {
+        "lastModified": 1782033839,
+        "narHash": "sha256-9Er+rbdCOArmRZnN0ou6AJ7d0j6MVuBVGa0jatGDg+w=",
+        "owner": "UpFourAGoodTime",
+        "repo": "nix-chromium-webapps",
+        "rev": "0c2f7099a462e25969e7ada859e31a431bdc292d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "UpFourAGoodTime",
+        "repo": "nix-chromium-webapps",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -462,6 +477,7 @@
     },
     "root": {
       "inputs": {
+        "chromium-webapps": "chromium-webapps",
         "disko": "disko",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
