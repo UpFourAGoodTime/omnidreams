@@ -98,6 +98,28 @@
       logseq-patch = pkgs.logseq.override {
         electron_39 = pkgs.electron_40;
       };
+
+      ungoogled-chromium-custom = (
+        pkgs.ungoogled-chromium.override {
+          commandLineArgs = [
+            "--enable-features=AcceleratedVideoEncoder"
+            "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+            "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+            "--enable-features=UseMultiPlaneFormatForHardwareVideo"
+            "--ignore-gpu-blocklist"
+            "--enable-zero-copy"
+            "--ozone-platform=wayland"
+            "--enable-unsafe-swiftshader"
+            "--flag-switches-begin"
+            "--enable-experimental-web-platform-features"
+            "--enable-unsafe-swiftshader"
+            "--extension-mime-request-handling=always-prompt-for-install"
+            "--enable-features=HdrAgtm,WaylandSessionManagement"
+            "--flag-switches-end"
+          ];
+        }
+      );
+
     in
     {
       imports = [
@@ -156,7 +178,13 @@
           }
         ];
 
-        package = pkgs.ungoogled-chromium;
+        package = ungoogled-chromium-custom;
+      };
+
+      programs.chromium = {
+        enable = true;
+        package = ungoogled-chromium-custom;
+
       };
 
       services.syncthing = {
@@ -217,7 +245,6 @@
       };
 
       home.packages = [
-        pkgs.ungoogled-chromium
         pkgs.freetube
         pkgs.zed-editor
         pkgs.element-desktop
