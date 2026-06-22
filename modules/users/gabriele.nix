@@ -76,6 +76,30 @@
         home = "/home/gabriele";
       };
 
+      programs.chromium = {
+        homepageLocation = "about:blank";
+        defaultSearchProviderEnabled = true;
+        defaultSearchProviderSearchURL = "https://noai.duckduckgo.com/?q={searchTerms}";
+        extraOpts = {
+          "BrowserGuestModeEnabled" = false;
+          "AdvancedProtectionAllowed" = false;
+          "BrowserSignin" = 0;
+          "SyncDisabled" = true;
+          "AutofillAddressEnabled" = false;
+          "AutofillCreditCardEnabled" = false;
+          "HappyEyeballsV3Enabled" = true;
+
+          "SpellcheckEnabled" = true;
+          "SpellcheckLanguage" = [
+            "en-US"
+          ];
+
+          "AdsSettingForIntrusiveAdsSites" = 2;
+
+        };
+
+      };
+
       home-manager.extraSpecialArgs = { inherit inputs; };
 
       home-manager.backupCommand = "echo 'home-manager: skipped backing up a config file'";
