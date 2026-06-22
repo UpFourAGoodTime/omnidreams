@@ -307,6 +307,29 @@
         "x-scheme-handler/https" = "chromium-desktop.desktop";
       };
 
+      xdg.desktopEntries = {
+        "qt5ct" = {
+          name = "Qt5 Settings";
+          noDisplay = true;
+        };
+
+        "qt6ct" = {
+          name = "Qt6 Settings";
+          noDisplay = true;
+        };
+
+        "kvantummanager" = {
+          name = "Kvantum Manager";
+          noDisplay = true;
+        };
+
+        "syncthing-ui" = {
+          name = "Syncthing Web UI";
+          noDisplay = true;
+        };
+
+      };
+
       home.file = {
         ".config/niri-stylix/user-config.kdl".text = ''
 
