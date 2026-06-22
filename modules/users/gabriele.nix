@@ -25,6 +25,7 @@
 
       stylix.targets = {
         plymouth.enable = false;
+        kmscon.enable = false;
       };
 
       stylix.cursor = {
@@ -53,6 +54,13 @@
         inputs.omniri.packages.${pkgs.stdenv.hostPlatform.system}.wallpapers
       }/share/wallpapers/wallhaven-k81776_2880x1620.png";
 
+      # Syncthing
+      networking.firewall.allowedTCPPorts = [
+        8384
+        22000
+        21027
+      ];
+
       users.users."gabriele" = {
         createHome = true;
         description = "Gabriel Eaker";
@@ -60,6 +68,7 @@
           "networkmanager"
           "wheel"
           "audio"
+          "syncthing"
           # "qemu-libvirtd"
           # "libvirtd"
         ];
@@ -83,31 +92,166 @@
       ...
     }:
     let
-      pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      # pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
+      # Create a customized version of logseq
+      logseq-patch = pkgs.logseq.override {
+        electron_39 = pkgs.electron_40;
+      };
+
+      ungoogled-chromium-custom = (
+        pkgs.ungoogled-chromium.override {
+          commandLineArgs = [
+            "--enable-features=AcceleratedVideoEncoder"
+            "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
+            "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
+            "--enable-features=UseMultiPlaneFormatForHardwareVideo"
+            "--ignore-gpu-blocklist"
+            "--enable-zero-copy"
+            "--ozone-platform=wayland"
+            "--enable-unsafe-swiftshader"
+            "--flag-switches-begin"
+            "--enable-experimental-web-platform-features"
+            "--enable-unsafe-swiftshader"
+            "--extension-mime-request-handling=always-prompt-for-install"
+            "--enable-features=HdrAgtm,WaylandSessionManagement"
+            "--flag-switches-end"
+          ];
+        }
+      );
+
     in
     {
       imports = [
         inputs.omniri.homeModules.default
+
+        inputs.chromium-webapps.homeManagerModules.default
       ];
 
-      home.username = "gabriele";
-      home.homeDirectory = "/home/gabriele";
+      # Let Home Manager install and manage itself.
+      programs.home-manager.enable = true;
 
-      home.stateVersion = "26.05";
+      home = {
+        stateVersion = "26.05";
+
+        username = "gabriele";
+        homeDirectory = "/home/gabriele";
+
+        sessionVariables = {
+          EDITOR = "nano";
+        };
+
+      };
+
+      nix.settings = {
+        download-buffer-size = 524288000;
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+      };
 
       nixpkgs.config.allowUnfree = true;
 
       stylix.enable = true;
 
-      home.packages = [
-        pkgs.ungoogled-chromium
-        pkgs.freetube
-        pkgs-stable.zed-editor
+      programs.chromium-webapps = {
+        enable = true;
+        webApps = [
+          {
+            name = "Mail";
+            url = "https://mail.proton.me";
+            icon = ../../assets/icons/webapps/Proton/mail.png;
+            appDataDir = false;
+          }
+          {
+            name = "FMD Server";
+            url = "https://server.fmd-foss.org/";
+            icon = ../../assets/icons/webapps/Proton/FMD.png;
+            appDataDir = false;
+          }
+          {
+            name = "Fluffychat";
+            url = "https://fluffychat.im/web";
+            icon = ../../assets/icons/webapps/Proton/fluffychat.png;
+            appDataDir = false;
+          }
+        ];
 
-        pkgs.blueman
+        package = ungoogled-chromium-custom;
+      };
+
+      programs.chromium = {
+        enable = true;
+        package = ungoogled-chromium-custom;
+
+      };
+
+      services.syncthing = {
+        enable = true;
+
+        settings = {
+          gui = {
+            user = "admin";
+            password = "%qz&w!fcRsPqwGDD0BkAuDDrcVEsQ!7k^mSe$d0eHbyGyrEEz@4tDRGqp5Vg*&Ed"; # This is insecure, consider this password compromised when setting up Sops-Nix
+          };
+
+          devices = {
+            "Pixel 6 Pro" = {
+              id = "BRJFJAB-XPSAVIJ-BMES6UA-SH76SEF-SHCVKH6-Q5KNMNZ-QS6GONV-PZPLKQA";
+            };
+
+            "Karen Pixel 7" = {
+              id = "X4JOUCU-7U3JH3D-X4YKI5K-EZADLC3-3YW5FSP-X3NCACC-RVO2TYJ-AQHKPQ6";
+            };
+
+          };
+
+          folders = {
+            "Downloads" = {
+              path = "/home/gabriele/Downloads";
+              devices = [ "Pixel 6 Pro" ];
+            };
+
+            "Documents" = {
+              path = "/home/gabriele/Documents";
+              devices = [ "Pixel 6 Pro" ];
+            };
+
+            "Pictures" = {
+              path = "/home/gabriele/Pictures";
+              devices = [ "Pixel 6 Pro" ];
+            };
+
+            "DCIM" = {
+              path = "/home/gabriele/DCIM";
+              devices = [ "Pixel 6 Pro" ];
+            };
+
+            "Seedvault Pixel 6 Pro" = {
+              path = "/home/gabriele/Seedvaults/Pixel-6-Pro";
+              devices = [ "Pixel 6 Pro" ];
+            };
+
+            "Seedvault Karen Pixel 7" = {
+              path = "/home/gabriele/Seedvaults/not-mine/Karen-Pixel-7";
+              devices = [ "Karen Pixel 7" ];
+            };
+
+          };
+
+        };
+
+      };
+
+      home.packages = [
+        pkgs.freetube
+        pkgs.zed-editor
+        pkgs.element-desktop
+
         pkgs.localsend
 
-        pkgs.logseq
+        logseq-patch
         pkgs.anki
 
         pkgs.obs-studio
@@ -127,15 +271,14 @@
 
       ];
 
-      home.sessionVariables = {
-        # QT_QPA_PLATFORMTHEME = "gtk3";
-        # QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
+      xdg.mimeApps.defaultApplications = {
+        "text/html" = "chromium-desktop.desktop";
+        "x-scheme-handler/http" = "chromium-desktop.desktop";
+        "x-scheme-handler/https" = "chromium-desktop.desktop";
       };
 
-      # Home Manager is pretty good at managing dotfiles. The primary way to manage
-      # plain files is through 'home.file'.
       home.file = {
-        "user-config.kdl".text = ''
+        ".config/niri-stylix/user-config.kdl".text = ''
 
           layout {
             background-color "transparent"
@@ -182,21 +325,8 @@
           user.name = "UpFourAGoodTime";
           user.email = "GabrielEaker@pm.me";
           init.defaultBranch = "main";
-          safe.directory = "/etc/nixos/";
         };
       };
 
-      home.sessionVariables = {
-        EDITOR = "nano";
-      };
-
-      # Let Home Manager install and manage itself.
-      programs.home-manager.enable = true;
-
-      nix.settings.download-buffer-size = 524288000;
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
     };
 }

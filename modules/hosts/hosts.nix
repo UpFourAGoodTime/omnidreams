@@ -6,6 +6,7 @@
     {
       lib,
       config,
+      pkgs,
       ...
     }:
     let
@@ -31,6 +32,10 @@
       };
 
       config = {
+
+        environment.systemPackages = [
+          pkgs.libsecret
+        ];
 
         boot.kernelParams = [
           # Supposed Linux local privilege escalation using this module:
@@ -94,10 +99,8 @@
             "$PATH" # Include existing PATH
           ];
           ZED_ALLOW_ROOT = "true";
+          PASSWORD_STORE_DIR = "gnome-libsecret";
         };
-
-        # Enable CUPS to print documents.
-        services.printing.enable = true;
 
         # use the example session manager (no others are packaged yet so this is enabled by default,
         # no need to redefine it in your config for now)

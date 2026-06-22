@@ -32,14 +32,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    chromium-webapps = {
+      url = "github:UpFourAGoodTime/nix-chromium-webapps";
+    };
+
     x1e-nixos-config = {
-      url = "github:UpFourAGoodTime/x1e-nixos-config/3c88be282680914095fefe6a6a5db18308011cac";
-      # url = "path:///home/gabriele/x1e-nixos-config";
+      url = "github:/UpFourAGoodTime/x1e-nixos-config";
     };
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/25.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-26.05";
   };
 
   outputs =
