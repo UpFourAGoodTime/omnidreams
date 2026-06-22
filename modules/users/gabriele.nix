@@ -176,6 +176,12 @@
             icon = ../../assets/icons/webapps/Proton/fluffychat.png;
             appDataDir = false;
           }
+          {
+            name = "Github";
+            url = "https://github.com";
+            icon = ../../assets/icons/webapps/Github.svg;
+            appDataDir = false;
+          }
         ];
 
         package = ungoogled-chromium-custom;
