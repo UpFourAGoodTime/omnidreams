@@ -113,6 +113,8 @@
     {
       inputs,
       pkgs,
+      config,
+      lib,
       ...
     }:
     let
@@ -227,8 +229,8 @@
           };
 
           devices = {
-            "Pixel 6 Pro" = {
-              id = "BRJFJAB-XPSAVIJ-BMES6UA-SH76SEF-SHCVKH6-Q5KNMNZ-QS6GONV-PZPLKQA";
+            "Pixel 8 Pro" = {
+              id = "XOXMDLP-SBCERI5-6Q6I2GK-I4QUWDS-OPPOC3N-65CL6LS-N7P4C7S-EP22NAZ";
             };
 
             "Karen Pixel 7" = {
@@ -240,27 +242,27 @@
           folders = {
             "Downloads" = {
               path = "/home/gabriele/Downloads";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "Documents" = {
               path = "/home/gabriele/Documents";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "Pictures" = {
               path = "/home/gabriele/Pictures";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "DCIM" = {
               path = "/home/gabriele/DCIM";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
-            "Seedvault Pixel 6 Pro" = {
-              path = "/home/gabriele/Seedvaults/Pixel-6-Pro";
-              devices = [ "Pixel 6 Pro" ];
+            "Seedvault Pixel 8 Pro" = {
+              path = "/home/gabriele/Seedvaults/Pixel-8-Pro";
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "Seedvault Karen Pixel 7" = {
