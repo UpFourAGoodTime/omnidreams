@@ -234,7 +234,8 @@
 
       home.packages = [
         pkgs.freetube
-        pkgs.zed-editor
+        pkgs.pear-desktop
+
         pkgs.element-desktop
 
         pkgs.localsend
