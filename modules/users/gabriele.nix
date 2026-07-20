@@ -112,7 +112,6 @@
     {
       inputs,
       pkgs,
-      config,
       lib,
       ...
     }:
@@ -123,34 +122,12 @@
       logseq-patch = pkgs.logseq.override {
         electron_39 = pkgs.electron_40;
       };
-
-      ungoogled-chromium-custom = (
-        pkgs.ungoogled-chromium.override {
-          commandLineArgs = [
-            "--enable-features=AcceleratedVideoEncoder"
-            "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
-            "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
-            "--enable-features=UseMultiPlaneFormatForHardwareVideo"
-            "--ignore-gpu-blocklist"
-            "--enable-zero-copy"
-            "--ozone-platform=wayland"
-            "--enable-unsafe-swiftshader"
-            "--flag-switches-begin"
-            "--enable-experimental-web-platform-features"
-            "--enable-unsafe-swiftshader"
-            "--extension-mime-request-handling=always-prompt-for-install"
-            "--enable-features=HdrAgtm,WaylandSessionManagement"
-            "--flag-switches-end"
-          ];
-        }
-      );
-
     in
     {
       imports = [
         inputs.omniri.homeModules.default
 
-        inputs.chromium-webapps.homeManagerModules.default
+        inputs.self.homeModules.chromium
       ];
 
       # Let Home Manager install and manage itself.
@@ -180,42 +157,22 @@
 
       stylix.enable = true;
 
-      programs.chromium-webapps = {
-        enable = true;
-        webApps = [
-          {
-            name = "Mail";
-            url = "https://mail.proton.me";
-            icon = ../../assets/icons/webapps/Proton/mail.png;
-            appDataDir = false;
-          }
-          {
-            name = "FMD Server";
-            url = "https://server.fmd-foss.org/";
-            icon = ../../assets/icons/webapps/Proton/FMD.png;
-            appDataDir = false;
-          }
-          {
-            name = "Fluffychat";
-            url = "https://fluffychat.im/web";
-            icon = ../../assets/icons/webapps/Proton/fluffychat.png;
-            appDataDir = false;
-          }
-          {
-            name = "Github";
-            url = "https://github.com";
-            icon = ../../assets/icons/webapps/Github.svg;
-            appDataDir = false;
-          }
-        ];
+      stylix.targets = {
+        desktop-entries-stylix = {
+          enable = true;
 
-        package = ungoogled-chromium-custom;
-      };
+          entries = {
+            pear-desktop.enable = true;
 
-      programs.chromium = {
-        enable = true;
-        package = ungoogled-chromium-custom;
+            element-desktop.enable = true;
 
+            chromium-browser = {
+              enable = true;
+
+              package = pkgs.ungoogled-chromium;
+            };
+          };
+        };
       };
 
       services.syncthing = {
@@ -290,39 +247,18 @@
 
         pkgs.prismlauncher
 
+        pkgs.zed-editor
         pkgs.nh
         pkgs.nixd
         pkgs.nil
 
-        pkgs.nerd-fonts.jetbrains-mono
-        pkgs.nerd-fonts.hasklug
-        pkgs.nerd-fonts.hurmit
+        pkgs.fastfetch
 
         # pkgs.python312Packages.yt-dlp
 
       ];
 
-      xdg.mimeApps.defaultApplications = {
-        "text/html" = "chromium-desktop.desktop";
-        "x-scheme-handler/http" = "chromium-desktop.desktop";
-        "x-scheme-handler/https" = "chromium-desktop.desktop";
-      };
-
       xdg.desktopEntries = {
-        "qt5ct" = {
-          name = "Qt5 Settings";
-          noDisplay = true;
-        };
-
-        "qt6ct" = {
-          name = "Qt6 Settings";
-          noDisplay = true;
-        };
-
-        "kvantummanager" = {
-          name = "Kvantum Manager";
-          noDisplay = true;
-        };
 
         "syncthing-ui" = {
           name = "Syncthing Web UI";
