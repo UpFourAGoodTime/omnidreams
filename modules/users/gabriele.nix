@@ -78,7 +78,7 @@
       programs.chromium = {
         homepageLocation = "about:blank";
         defaultSearchProviderEnabled = true;
-        defaultSearchProviderSearchURL = "https://noai.duckduckgo.com/?q={searchTerms}";
+        defaultSearchProviderSearchURL = "https://www.qwant.com/?q={searchTerms}";
         extraOpts = {
           "BrowserGuestModeEnabled" = false;
           "AdvancedProtectionAllowed" = false;
