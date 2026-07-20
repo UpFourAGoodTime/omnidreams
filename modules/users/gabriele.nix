@@ -23,30 +23,29 @@
         enable = true;
       };
 
-      stylix.targets = {
-        plymouth.enable = false;
-        kmscon.enable = false;
-      };
-
       stylix.cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
         size = 20;
       };
 
+      stylix.opacity = {
+        terminal = 0.8;
+      };
+
       stylix.fonts = {
         monospace = {
-          package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font Mono";
+          package = pkgs.roboto-mono;
+          name = "Roboto Mono";
         };
 
         sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
+          package = pkgs.roboto-serif;
+          name = "Roboto Serif";
         };
         serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
+          package = pkgs.roboto-serif;
+          name = "Roboto Serif";
         };
       };
 
@@ -371,7 +370,6 @@
         enable = true;
         clean.enable = true;
         clean.extraArgs = "--keep-since 4d --keep 3";
-        flake = "~/omnidreams"; # sets NH_OS_FLAKE variable for you
       };
 
       programs.git = {
