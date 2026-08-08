@@ -174,6 +174,10 @@
         };
       };
 
+      programs.alacritty = {
+        enable = true;
+      };
+
       services.syncthing = {
         enable = true;
 
