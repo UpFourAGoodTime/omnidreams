@@ -23,30 +23,29 @@
         enable = true;
       };
 
-      stylix.targets = {
-        plymouth.enable = false;
-        kmscon.enable = false;
-      };
-
       stylix.cursor = {
         package = pkgs.bibata-cursors;
         name = "Bibata-Modern-Classic";
         size = 20;
       };
 
+      stylix.opacity = {
+        terminal = 0.8;
+      };
+
       stylix.fonts = {
         monospace = {
-          package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font Mono";
+          package = pkgs.roboto-mono;
+          name = "Roboto Mono";
         };
 
         sansSerif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Sans";
+          package = pkgs.roboto-serif;
+          name = "Roboto Serif";
         };
         serif = {
-          package = pkgs.dejavu_fonts;
-          name = "DejaVu Serif";
+          package = pkgs.roboto-serif;
+          name = "Roboto Serif";
         };
       };
 
@@ -76,6 +75,30 @@
         home = "/home/gabriele";
       };
 
+      programs.chromium = {
+        homepageLocation = "about:blank";
+        defaultSearchProviderEnabled = true;
+        defaultSearchProviderSearchURL = "https://www.qwant.com/?q={searchTerms}";
+        extraOpts = {
+          "BrowserGuestModeEnabled" = false;
+          "AdvancedProtectionAllowed" = false;
+          "BrowserSignin" = 0;
+          "SyncDisabled" = true;
+          "AutofillAddressEnabled" = false;
+          "AutofillCreditCardEnabled" = false;
+          "HappyEyeballsV3Enabled" = true;
+
+          "SpellcheckEnabled" = true;
+          "SpellcheckLanguage" = [
+            "en-US"
+          ];
+
+          "AdsSettingForIntrusiveAdsSites" = 2;
+
+        };
+
+      };
+
       home-manager.extraSpecialArgs = { inherit inputs; };
 
       home-manager.backupCommand = "echo 'home-manager: skipped backing up a config file'";
@@ -96,36 +119,14 @@
 
       # Create a customized version of logseq
       logseq-patch = pkgs.logseq.override {
-        electron_39 = pkgs.electron_40;
+        electron_39 = pkgs.electron_41;
       };
-
-      ungoogled-chromium-custom = (
-        pkgs.ungoogled-chromium.override {
-          commandLineArgs = [
-            "--enable-features=AcceleratedVideoEncoder"
-            "--enable-features=AcceleratedVideoEncoder,VaapiOnNvidiaGPUs,VaapiIgnoreDriverChecks,Vulkan,DefaultANGLEVulkan,VulkanFromANGLE"
-            "--enable-features=VaapiIgnoreDriverChecks,VaapiVideoDecoder,PlatformHEVCDecoderSupport"
-            "--enable-features=UseMultiPlaneFormatForHardwareVideo"
-            "--ignore-gpu-blocklist"
-            "--enable-zero-copy"
-            "--ozone-platform=wayland"
-            "--enable-unsafe-swiftshader"
-            "--flag-switches-begin"
-            "--enable-experimental-web-platform-features"
-            "--enable-unsafe-swiftshader"
-            "--extension-mime-request-handling=always-prompt-for-install"
-            "--enable-features=HdrAgtm,WaylandSessionManagement"
-            "--flag-switches-end"
-          ];
-        }
-      );
-
     in
     {
       imports = [
         inputs.omniri.homeModules.default
 
-        inputs.chromium-webapps.homeManagerModules.default
+        inputs.self.homeModules.chromium
       ];
 
       # Let Home Manager install and manage itself.
@@ -155,36 +156,26 @@
 
       stylix.enable = true;
 
-      programs.chromium-webapps = {
-        enable = true;
-        webApps = [
-          {
-            name = "Mail";
-            url = "https://mail.proton.me";
-            icon = ../../assets/icons/webapps/Proton/mail.png;
-            appDataDir = false;
-          }
-          {
-            name = "FMD Server";
-            url = "https://server.fmd-foss.org/";
-            icon = ../../assets/icons/webapps/Proton/FMD.png;
-            appDataDir = false;
-          }
-          {
-            name = "Fluffychat";
-            url = "https://fluffychat.im/web";
-            icon = ../../assets/icons/webapps/Proton/fluffychat.png;
-            appDataDir = false;
-          }
-        ];
+      stylix.targets = {
+        desktop-entries-stylix = {
+          enable = true;
 
-        package = ungoogled-chromium-custom;
+          entries = {
+            pear-desktop.enable = true;
+
+            element-desktop.enable = true;
+
+            chromium-browser = {
+              enable = true;
+
+              package = pkgs.ungoogled-chromium;
+            };
+          };
+        };
       };
 
-      programs.chromium = {
+      programs.alacritty = {
         enable = true;
-        package = ungoogled-chromium-custom;
-
       };
 
       services.syncthing = {
@@ -197,8 +188,8 @@
           };
 
           devices = {
-            "Pixel 6 Pro" = {
-              id = "BRJFJAB-XPSAVIJ-BMES6UA-SH76SEF-SHCVKH6-Q5KNMNZ-QS6GONV-PZPLKQA";
+            "Pixel 8 Pro" = {
+              id = "XOXMDLP-SBCERI5-6Q6I2GK-I4QUWDS-OPPOC3N-65CL6LS-N7P4C7S-EP22NAZ";
             };
 
             "Karen Pixel 7" = {
@@ -210,27 +201,27 @@
           folders = {
             "Downloads" = {
               path = "/home/gabriele/Downloads";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "Documents" = {
               path = "/home/gabriele/Documents";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "Pictures" = {
               path = "/home/gabriele/Pictures";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "DCIM" = {
               path = "/home/gabriele/DCIM";
-              devices = [ "Pixel 6 Pro" ];
+              devices = [ "Pixel 8 Pro" ];
             };
 
-            "Seedvault Pixel 6 Pro" = {
-              path = "/home/gabriele/Seedvaults/Pixel-6-Pro";
-              devices = [ "Pixel 6 Pro" ];
+            "Seedvault Pixel 8 Pro" = {
+              path = "/home/gabriele/Seedvaults/Pixel-8-Pro";
+              devices = [ "Pixel 8 Pro" ];
             };
 
             "Seedvault Karen Pixel 7" = {
@@ -246,7 +237,8 @@
 
       home.packages = [
         pkgs.freetube
-        pkgs.zed-editor
+        pkgs.pear-desktop
+
         pkgs.element-desktop
 
         pkgs.localsend
@@ -259,22 +251,24 @@
 
         pkgs.prismlauncher
 
+        pkgs.zed-editor
         pkgs.nh
         pkgs.nixd
         pkgs.nil
 
-        pkgs.nerd-fonts.jetbrains-mono
-        pkgs.nerd-fonts.hasklug
-        pkgs.nerd-fonts.hurmit
+        pkgs.fastfetch
 
         # pkgs.python312Packages.yt-dlp
 
       ];
 
-      xdg.mimeApps.defaultApplications = {
-        "text/html" = "chromium-desktop.desktop";
-        "x-scheme-handler/http" = "chromium-desktop.desktop";
-        "x-scheme-handler/https" = "chromium-desktop.desktop";
+      xdg.desktopEntries = {
+
+        "syncthing-ui" = {
+          name = "Syncthing Web UI";
+          noDisplay = true;
+        };
+
       };
 
       home.file = {
@@ -316,7 +310,6 @@
         enable = true;
         clean.enable = true;
         clean.extraArgs = "--keep-since 4d --keep 3";
-        flake = "~/omnidreams"; # sets NH_OS_FLAKE variable for you
       };
 
       programs.git = {
